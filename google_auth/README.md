@@ -2,7 +2,7 @@
 Most of this was lifted directly from [Google Cloud Rust](https://github.com/googleapis/google-cloud-rust)
 
 ## Authentication
-
+
 ### Get client.json
 
 In [Google Cloud Console](https://console.cloud.google.com), create a project, create an OAuth2 credential, and download the credentials file.  Call it what you want, but in the following step, it's called `client.json`.
