@@ -1,0 +1,37 @@
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum ConditionType {
+    ConditionTypeUnspecified,
+    NumberGreater,
+    NumberGreaterThanEq,
+    NumberLess,
+    NumberLessThanEq,
+    NumberNotEq,
+    NumberBetween,
+    NumberNotBetween,
+    TextContains,
+    TextStartsWith,
+    TextEndsWith,
+    TextEq,
+    TextIsEmail,
+    TextIsUrl,
+    DateEq,
+    DateBefore,
+    DateAfter,
+    DateOnOrBefore,
+    DateOnOrAfter,
+    DateBetween,
+    DateNotBetween,
+    DateIsValid,
+    OneOfRange,
+    OneOfList,
+    Blank,
+    NotBlank,
+    CustomFormula,
+    Boolean,
+    TextNotEq,
+    DateNotEq,
+    FilterExpression,
+}

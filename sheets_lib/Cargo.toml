@@ -1,0 +1,15 @@
+[package]
+name = "sheets_lib"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+reqwest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+convert_case.workspace = true
+regex.workspace = true
+serde_with = "3.8"
