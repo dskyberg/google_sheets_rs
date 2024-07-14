@@ -2,12 +2,6 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum Error {
-    #[error("Error parsing Currency")]
-    ParseCurrency,
-    #[error("ParseNumber")]
-    ParseNumber,
-    #[error("ParseBoolean")]
-    ParseBoolean,
     #[error("JSON Object expected")]
     ExpectObject,
     #[error("JSON array expected")]

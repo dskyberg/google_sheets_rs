@@ -45,3 +45,28 @@ impl Default for SheetProperties {
         Self::new()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_props() {
+        let result = serde_json::from_str::<SheetProperties>(json()).expect("oops");
+        dbg!(result);
+    }
+
+    fn json() -> &'static str {
+        r##"{
+    "sheetId": 0,
+    "title": "Accounts",
+    "index": 0,
+    "sheetType": "GRID",
+    "gridProperties": {
+        "rowCount": 22,
+        "columnCount": 7,
+        "frozenRowCount": 1
+    }
+}"##
+    }
+}

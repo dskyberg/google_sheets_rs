@@ -1,5 +1,13 @@
 use anyhow::Result;
+use reqwest::Response as ReqwestResponse;
 use serde::{de::DeserializeOwned, Serialize};
+use thiserror::Error;
+
+#[derive(Debug, Error)]
+pub enum HttpError {
+    #[error("Request error")]
+    Request(#[from] reqwest::Error),
+}
 
 /// HTTP Get that returns the type `T`
 ///
@@ -12,7 +20,7 @@ pub(crate) async fn get<T: DeserializeOwned>(url: &str, token: &str) -> Result<T
     let value = client
         .get(url)
         .header("Authorization", &format!("Bearer {token}"))
-        .header("Accept", "application / json")
+        .header("Accept", "application/json")
         .send()
         .await?
         .json::<T>()
@@ -44,14 +52,16 @@ pub(crate) async fn post<T: Serialize, D: DeserializeOwned>(
     payload: &T,
 ) -> Result<D> {
     let client = reqwest::Client::new();
-    let response = client
+    let response: ReqwestResponse = client
         .post(url)
         .header("Authorization", &format!("Bearer {token}"))
         .header("Accept", "application / json")
         .json(payload)
         .send()
-        .await?
-        .json::<D>()
         .await?;
-    Ok(response)
+
+    match response.error_for_status_ref() {
+        Ok(_res) => Ok(response.json::<D>().await?),
+        Err(err) => Err(HttpError::Request(err).into()),
+    }
 }
