@@ -29,39 +29,31 @@ impl ValueInputOption {
     pub fn new() -> Self {
         Self::Raw
     }
-
-    pub fn to_query(&self) -> String {
-        format!("valueInputOption={}", self)
-    }
 }
 
 #[derive(Debug, PartialEq, Serialize)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
-pub enum ResponseValueRenderOption {
+pub enum ValueRenderOption {
     FormattedValue,
     UnformattedValue,
     Formula,
 }
 
-impl std::fmt::Display for ResponseValueRenderOption {
+impl std::fmt::Display for ValueRenderOption {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let value = format!("{:?}", self).to_case(Case::UpperSnake);
         write!(f, "{}", value)
     }
 }
-impl Default for ResponseValueRenderOption {
+impl Default for ValueRenderOption {
     fn default() -> Self {
         Self::new()
     }
 }
 
-impl ResponseValueRenderOption {
+impl ValueRenderOption {
     pub fn new() -> Self {
         Self::UnformattedValue
-    }
-
-    pub fn to_query(&self) -> String {
-        format!("responseValueRenderOption={}", &self)
     }
 }
 
@@ -130,29 +122,5 @@ impl From<&Sheet> for ValueRange {
             major_dimension,
             values,
         }
-    }
-}
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_querys() {
-        let vro = ResponseValueRenderOption::UnformattedValue;
-        println!("{}", vro.to_query())
-    }
-    #[test]
-    fn test_deserialize_value_range() {
-        let json = include_str!("../../../value_range_response.json");
-        let value_range = serde_json::from_str::<ValueRange>(json).expect("Failed to deserialize");
-        let rendered = serde_json::to_string_pretty(&value_range).expect("Failed to serialize");
-
-        println!("{}", rendered);
-    }
-    #[test]
-    fn test_query() {
-        let value_input_option = ValueInputOption::InputValueOptionUnspecified;
-
-        println!("{}", &value_input_option.to_query());
     }
 }

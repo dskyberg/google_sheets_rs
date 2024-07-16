@@ -4,5 +4,4 @@ pub use model::*;
 
 pub mod api;
 pub mod error;
-mod http;
 pub mod model;

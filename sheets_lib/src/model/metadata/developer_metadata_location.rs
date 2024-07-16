@@ -1,7 +1,9 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{DeveloperMetadataLocationType, DimensionRange};
+use crate::DimensionRange;
+
+use super::DeveloperMetadataLocationType;
 
 #[skip_serializing_none]
 #[derive(Debug, PartialEq, Serialize, Deserialize)]

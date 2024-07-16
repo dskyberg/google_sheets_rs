@@ -1,13 +1,20 @@
 use anyhow::Result;
 
-use crate::{http, Api};
+use crate::{http, ApiConfig};
 
 use super::{request::Request, response::Response};
 
 // POST https://sheets.googleapis.com/v4/spreadsheets/{spreadsheetId}:batchUpdate
-pub async fn update<'a>(api: &Api, spreadsheet_id: &str, request: &Request) -> Result<Response> {
-    let url = format!("{}/spreadsheets/{spreadsheet_id}:batchUpdate", api.base_url);
+pub async fn update<'a>(
+    api_config: &ApiConfig,
+    spreadsheet_id: &str,
+    request: &Request,
+) -> Result<Response> {
+    let url = format!(
+        "{}/spreadsheets/{spreadsheet_id}:batchUpdate",
+        api_config.base_url
+    );
 
-    let result = http::post::<Request, Response>(&url, &api.access_token, request).await?;
+    let result = http::post::<Request, Response>(api_config, &url, request).await?;
     Ok(result)
 }
