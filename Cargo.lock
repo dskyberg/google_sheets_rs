@@ -1095,7 +1095,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "sheets_appn"
+name = "sheets_app"
 version = "0.1.0"
 dependencies = [
  "anyhow",

@@ -1,5 +1,5 @@
 [package]
-name = "sheets_appn"
+name = "sheets_app"
 version.workspace = true
 edition.workspace = true
 
